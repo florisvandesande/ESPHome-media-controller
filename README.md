@@ -29,10 +29,9 @@ _You can use the buttons to do anything in Home Assistant, the aren't programmed
 - Soldering iron
 
 You can find the STL files for the case and the knob here:
-- [Case on Github](stl/ESPHome-Media-controller.stl)
-- [Case on Printables](https://www.printables.com/model/551624-esphome-media-controller)
-- [Knob on Github](stl/ESPHome-Media-controller-knob.stl)
-- [Knob on Printables](https://www.printables.com/model/551624-esphome-media-controller)
+- [Case and knob on Github](stl/ESPHome-Media-controller.stl)
+- [Case and knob on Printables](https://www.printables.com/model/551624-esphome-media-controller)
+- [Case and knob on Thingiverse](https://www.thingiverse.com/thing:6167722)
 
 ![3D model of the media controller](images/3d-model-without-desk.jpeg)
 

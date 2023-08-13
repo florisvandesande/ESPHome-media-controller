@@ -1,0 +1,131 @@
+# ESPHome Media Controller
+# Change the substitutions below to fit your own Home Assistant setup
+# You can generate an api_key at https://esphome.io/components/api.html
+# Projectpage: https://florisvandesande.com/project/esphome-media-controller
+
+substitutions:
+  device_name: media-controller-desk
+  friendly_name: "Media Controller desk"
+  media_player: media_player.your_media_player
+  api_key: "dLrgP/XXOWI6qTfe0hOdBA9ojg8e1GELX4w4tMtpNWo="
+  ap_password: !secret captive-portal       # set in secrets.yaml or change me!
+  wifi_ssid: !secret wifi_ssid              # set in secrets.yaml or change me!
+  wifi_password: !secret wifi_password      # set in secrets.yaml or change me!
+
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  comment: ESPHome ${friendly_name}
+  name_add_mac_suffix: true
+  platform: ESP8266
+  board: d1_mini
+  
+  # This will allow for (future) project identification, configuration and updates.
+  project:
+    name: esphome.media-controller-desk
+    version: "1.0"
+
+# To be able to get logs from the device via serial and api.
+logger:
+
+# API is a requirement of the dashboard import.
+api:
+  encryption:
+    key: ${api_key}
+
+# OTA is required for Over-the-Air updating
+ota:
+
+# Network settings
+wifi:
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${device_name}"
+    password: ${ap_password}
+
+captive_portal:
+
+web_server:
+  port: 80
+  
+
+binary_sensor:
+  
+# Key switches
+  - platform: gpio
+    pin:
+      number: D5
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Left Button"
+    filters:
+      - delayed_on: 10ms
+  - platform: gpio
+    pin:
+      number: D6
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Middle Button"
+    filters:
+      - delayed_on: 10ms
+  - platform: gpio
+    pin:
+      number: D7
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Right Button"
+    filters:
+      - delayed_on: 10ms
+
+# Rotary Encoder
+  - platform: gpio
+    pin:
+      number: D2
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Rotary Encoder Button"
+    on_press:
+      - homeassistant.service:
+          service: media_player.media_play_pause
+          data:
+            entity_id: ${media_player}
+
+sensor:
+  - platform: rotary_encoder
+    name: "Rotary Encoder"
+    pin_a:
+      number: D3
+      mode: INPUT
+    pin_b:
+      number: D4
+      mode: INPUT
+    on_clockwise:
+      - homeassistant.service:
+          service: media_player.volume_up
+          data:
+            entity_id: ${media_player}
+      - logger.log: "Turned Clockwise"
+    on_anticlockwise:
+      - homeassistant.service:
+          service: media_player.volume_down
+          data:
+            entity_id: ${media_player}
+      - logger.log: "Turned Anti Clockwise"
+
+
+# Network details
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: ${device_name} IP
+      icon: mdi:ip-network
+    ssid:
+      name: ${device_name} SSID
+      icon: mdi:wifi
+    mac_address:
+      name: "${device_name} MAC"
+      icon: mdi:identifier

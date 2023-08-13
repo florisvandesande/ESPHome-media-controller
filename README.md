@@ -1,7 +1,7 @@
 # ESPHome media controller for Home Assistant
 [ESPHome](https://esphome.io/) media controller is made by [Floris van de Sande](https://florisvandesande.com/) and is meant to be used with [Home Assistant](https://www.home-assistant.io).
 
-![media controller](images/3d-model with desk.jpeg)
+![media controller](images/3d-model-with-desk.jpeg)
 
 ## Features
 - Three buttons which you can use in your [Home Assistant](https://www.home-assistant.io) automations
@@ -68,7 +68,7 @@ Of course your could go down to the **sensor** part of the code to change the be
 
 ![switches and rotary encoder inserted into case](images/soldered-switches-inserted.jpeg)
 
-![everything soldered together](images/everything soldered together.jpeg)
+![everything soldered together](images/everything-soldered-together.jpeg)
 
 ![media controller mounted under desk](images/media-controller-mounted.jpeg)
 

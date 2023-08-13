@@ -50,6 +50,9 @@ You can find the STL files for the case and the knob here:
 | D6 / GPIO12     |                | Button 2     | Green       |
 | D7 / GPIO13     |                | Button 3     | Red         |
 
+| D1 mini ESP8266                 | Rotary encoder                         |
+| ------------------------------- | -------------------------------------- |
+| ![](images/D1-Mini-pinout.webp) | ![](images/rotary-encoder-pinout.jpeg) |
 
 ## Code
 At the top of the [yaml](ESPHome-media-controller.yaml) are the **substitutions** which are used througout the code which you can easily change. The main one to change is the **media_player** substitution, as you won't be able to use the Rotary encoder for Play/Pause otherwise.
